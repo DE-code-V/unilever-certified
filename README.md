@@ -1,5 +1,8 @@
 # Hierarchical Text Classififcation with free and open-sourced LLMs
 This repository demonstrates a hybrid NLP pipeline for classifying product reviews into a hierarchical taxonomy (Level 1 → Level 2 factors) using a combination of semantic embeddings and large language models (LLMs)
+
+### Project Workflow/Idea
+![flow_chart](assests/flow-horizontal.png)
 ## 1. Approach:
 * **Problem Understanding:** <br>
   Each review can map to multiple Level 1 (broad category) and Level 2 (granular subcategory) factors. <br>
