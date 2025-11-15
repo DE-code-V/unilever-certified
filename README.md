@@ -11,7 +11,7 @@ This repository demonstrates a hybrid NLP pipeline for classifying product revie
 * **Method:** <br>
 1. Preprocess the training data and extract valid (Level 1, Level 2) taxonomy pairs.
 2. Compute sentence embeddings using SentenceTransformer's `all-MiniLM-L6-v2` (to reduce number of tokens sent)
-3. Use Cerebras Llama 3.1-8B via free inference API to perform few-shot
+3. Use Cerebras Llama 3.3-70b via free inference API to perform few-shot
 4. Shot the prompt with few examples to LLm
 5. Evaluate on a holdout subset using macro-averaged precision, recall, and F1
 
@@ -19,15 +19,15 @@ This repository demonstrates a hybrid NLP pipeline for classifying product revie
 | Model                                        | Role                                                                                                                                                          | Reason                                                                                        |
 | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | 1. **SentenceTransformer (`all-MiniLM-L6-v2`)** | Semantic embedding model                                                                                                                                      | Lightweight, high-quality sentence-level embeddings for similarity search      |
-| 2. **Llama 3.1–8B (via Cerebras)**              | LLM classifier                                                                                                                                                | Free-tier accessible (1M tokens/day), strong contextual reasoning, and capable of multi-label classification |
+| 2. **llama-3.3-70b (via Cerebras)**              | LLM classifier                                                                                                                                                | Free-tier accessible (1M tokens/day), strong contextual reasoning, and capable of multi-label classification |
                                                            
 ## 3. Output Accuracy
 ### Holdout Evaluation (10% of training data):
 | Metric    | Score |
 | --------- | ----- |
-| Precision |  0.035 |
-| Recall    | 0.414 |
-| F1 Score  | 0.059 |
+| Precision |  0.395 |
+| Recall    | 0.367 |
+| F1 Score  | 0.359 |
 
 ### Interpretation from accuracy:
 * Reasonable precision and recall for an open-text multi-label problem.
@@ -36,7 +36,7 @@ This repository demonstrates a hybrid NLP pipeline for classifying product revie
 
 ## Misc and Notes
 During experimentation, a hybrid version of the classifier was implemented, combining
-* LLM-based reasoning (using Llama 3.1–8B)
+* LLM-based reasoning (using llama-3.3-70b)
 * Embedding-based similarity search (retrieving top-k semantically similar training examples using SentenceTransformer)
 
 The motivation was to give the model more contextual grounding and improve few-shot performance by selecting examples dynamically based on semantic proximity
